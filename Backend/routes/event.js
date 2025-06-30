@@ -49,4 +49,83 @@ router.post("/create", verifyToken, upload.single("image"), async (req, res) => 
   }
 });
 
+
+
+//GET
+
+
+router.get("/", async (req, res) => {
+  try {
+    const events = await Event.find({ isActive: true })
+      .populate('owner', 'name email')
+      .sort({ createdAt: -1 });
+    res.json({ events });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch events" });
+  }
+});
+
+
+router.get("/:id", async (req, res) => {
+  try {
+    const event = await Event.findById(req.params.id)
+      .populate('owner', 'name email');
+    if (!event) return res.status(404).json({ error: "Event not found" });
+    res.json(event);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch event" });
+  }
+});
+
+
+router.get("/my/events", verifyToken, async (req, res) => {
+  try {
+    const events = await Event.find({ owner: req.user.id })
+      .sort({ createdAt: -1 });
+    res.json({ events });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch your events" });
+  }
+});
+
+
+//PUT
+router.put("/:id", verifyToken, checkEventOwnership, upload.single("image"), async (req, res) => {
+  try {
+    const event = req.event; // From middleware
+
+    // Additional validation: prevent changing critical fields if tickets are sold
+    if (event.ticketsSold > 0) {
+      const restrictedFields = ['totalCapacity', 'ticketPrice', 'eventDate'];
+      const hasRestrictedChanges = restrictedFields.some(field => 
+        req.body[field] && req.body[field] != event[field]
+      );
+      
+      if (hasRestrictedChanges) {
+        return res.status(400).json({ 
+          error: "Cannot modify capacity, price, or date after tickets have been sold" 
+        });
+      }
+    }
+
+    if (req.file) {
+      if (event.imagePublicId) {
+        await cloudinary.uploader.destroy(event.imagePublicId);
+      }
+      req.body.image = req.file.path;
+      req.body.imagePublicId = req.file.filename;
+    }
+
+    const updatedEvent = await Event.findByIdAndUpdate(
+      req.params.id, 
+      req.body, 
+      { new: true }
+    ).populate('owner', 'name email');
+    
+    res.json(updatedEvent);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update event" });
+  }
+});
+
 module.exports = router;
