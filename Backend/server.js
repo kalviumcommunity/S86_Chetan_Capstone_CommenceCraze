@@ -8,10 +8,9 @@ const  mongoose = require('mongoose');
 const cookieParser = require("cookie-parser");
 
 app.use(express.json())
- 
-
-
-
+ mongoose.connect(process.env.MONGO_URL)
+    .then(() => console.log("✅ MongoDB connected"))
+    .catch((err) => console.error("❌ MongoDB error:", err));
 
 
 app.get('/get',async (req,res)=>{
