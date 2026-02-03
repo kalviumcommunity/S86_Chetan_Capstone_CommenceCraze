@@ -51,31 +51,31 @@ function CreateEventModal({ onClose, onSuccess }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/70 overflow-y-auto">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="card max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        className="card max-w-2xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto my-4"
       >
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gradient">Create New Event</h2>
+        <div className="flex justify-between items-center mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-gradient">Create New Event</h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white text-2xl"
+            className="text-gray-400 hover:text-white text-2xl sm:text-3xl leading-none"
           >
             ×
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-2">Event Title *</label>
+            <label className="block text-xs sm:text-sm font-medium mb-2">Event Title *</label>
             <input
               type="text"
               name="title"
               required
-              className="input-field"
+              className="input-field text-sm sm:text-base"
               placeholder="Enter event title"
               value={formData.title}
               onChange={handleChange}
@@ -83,26 +83,26 @@ function CreateEventModal({ onClose, onSuccess }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">Description *</label>
+            <label className="block text-xs sm:text-sm font-medium mb-2">Description *</label>
             <textarea
               name="description"
               required
-              rows="4"
-              className="input-field"
+              rows="3"
+              className="input-field text-sm sm:text-base"
               placeholder="Describe your event"
               value={formData.description}
               onChange={handleChange}
             />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Event Date *</label>
+              <label className="block text-xs sm:text-sm font-medium mb-2">Event Date *</label>
               <input
                 type="date"
                 name="eventDate"
                 required
-                className="input-field"
+                className="input-field text-sm sm:text-base"
                 value={formData.eventDate}
                 onChange={handleChange}
                 min={new Date().toISOString().split('T')[0]}
@@ -110,12 +110,12 @@ function CreateEventModal({ onClose, onSuccess }) {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2">Event Time *</label>
+              <label className="block text-xs sm:text-sm font-medium mb-2">Event Time *</label>
               <input
                 type="time"
                 name="eventTime"
                 required
-                className="input-field"
+                className="input-field text-sm sm:text-base"
                 value={formData.eventTime}
                 onChange={handleChange}
               />
@@ -123,28 +123,28 @@ function CreateEventModal({ onClose, onSuccess }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">Location *</label>
+            <label className="block text-xs sm:text-sm font-medium mb-2">Location *</label>
             <input
               type="text"
               name="location"
               required
-              className="input-field"
+              className="input-field text-sm sm:text-base"
               placeholder="Event venue"
               value={formData.location}
               onChange={handleChange}
             />
           </div>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Ticket Price ($) *</label>
+              <label className="block text-xs sm:text-sm font-medium mb-2">Ticket Price ($) *</label>
               <input
                 type="number"
                 name="ticketPrice"
                 required
                 min="0"
                 step="0.01"
-                className="input-field"
+                className="input-field text-sm sm:text-base"
                 placeholder="0.00"
                 value={formData.ticketPrice}
                 onChange={handleChange}

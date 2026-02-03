@@ -24,29 +24,29 @@ function Events() {
   };
 
   return (
-    <div className="min-h-screen bg-dark p-8">
+    <div className="min-h-screen bg-dark p-4 sm:p-6 md:p-8">
       <div className="container-custom">
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-4">
           <div>
-            <h1 className="text-4xl font-bold text-gradient">Events</h1>
-            <p className="text-gray-400 mt-2">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">Events</h1>
+            <p className="text-sm sm:text-base text-gray-400 mt-2">
               {loading ? 'Loading...' : `${events.length} events available`}
             </p>
           </div>
           <button 
             onClick={handleCreateClick}
-            className="btn-primary"
+            className="btn-primary w-full sm:w-auto text-sm sm:text-base"
           >
             + Create Event
           </button>
         </div>
 
         {loading ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[1, 2, 3].map((i) => (
               <div key={i} className="card animate-pulse">
-                <div className="h-48 bg-dark-700 rounded-lg mb-4"></div>
-                <div className="h-6 bg-dark-700 rounded mb-2"></div>
+                <div className="h-40 sm:h-48 bg-dark-700 rounded-lg mb-4"></div>
+                <div className="h-5 sm:h-6 bg-dark-700 rounded mb-2"></div>
                 <div className="h-4 bg-dark-700 rounded w-2/3"></div>
               </div>
             ))}
@@ -55,20 +55,20 @@ function Events() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="card text-center py-20"
+            className="card text-center py-12 sm:py-16 md:py-20"
           >
-            <div className="text-6xl mb-4">📅</div>
-            <h2 className="text-2xl font-bold mb-2">No Events Yet</h2>
-            <p className="text-gray-400 mb-6">Be the first to create an event!</p>
+            <div className="text-4xl sm:text-5xl md:text-6xl mb-4">📅</div>
+            <h2 className="text-xl sm:text-2xl font-bold mb-2">No Events Yet</h2>
+            <p className="text-sm sm:text-base text-gray-400 mb-6">Be the first to create an event!</p>
             <button 
               onClick={handleCreateClick}
-              className="btn-primary"
+              className="btn-primary text-sm sm:text-base"
             >
               Create Event
             </button>
           </motion.div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {events.map((event, index) => (
               <motion.div
                 key={event._id}

@@ -36,28 +36,28 @@ function Dashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-dark p-8">
+    <div className="min-h-screen bg-dark p-4 sm:p-6 md:p-8">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className="container-custom"
       >
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 sm:mb-8 gap-4">
           <div>
-            <h1 className="text-4xl font-bold mb-2 text-gradient">Dashboard</h1>
-            <p className="text-gray-400">Welcome back, {user?.name}!</p>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-gradient">Dashboard</h1>
+            <p className="text-sm sm:text-base text-gray-400">Welcome back, {user?.name}!</p>
           </div>
           {(user?.role === 'organizer' || user?.role === 'admin') && (
             <button 
               onClick={() => setShowCreateModal(true)}
-              className="btn-primary"
+              className="btn-primary w-full sm:w-auto text-sm sm:text-base"
             >
               + Create Event
             </button>
           )}
         </div>
         
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {/* Stats Cards */}
           {stats.map((stat, index) => (
             <motion.div
@@ -69,26 +69,26 @@ function Dashboard() {
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">{stat.title}</p>
-                  <p className={`text-3xl font-bold ${stat.color} mt-2`}>
+                  <p className="text-gray-400 text-xs sm:text-sm">{stat.title}</p>
+                  <p className={`text-2xl sm:text-3xl font-bold ${stat.color} mt-2`}>
                     {loading ? '...' : stat.value}
                   </p>
                 </div>
-                <div className="text-5xl">{stat.icon}</div>
+                <div className="text-3xl sm:text-4xl md:text-5xl">{stat.icon}</div>
               </div>
             </motion.div>
           ))}
         </div>
 
         {/* Quick Actions */}
-        <div className="card mb-8">
-          <h2 className="text-2xl font-bold mb-4">Quick Actions</h2>
-          <div className="grid md:grid-cols-3 gap-3">
+        <div className="card mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold mb-4">Quick Actions</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             <Link to="/events">
-              <button className="btn-primary w-full">View All Events</button>
+              <button className="btn-primary w-full text-sm sm:text-base">View All Events</button>
             </Link>
             <button 
-              className="btn-outline w-full"
+              className="btn-outline w-full text-sm sm:text-base"
               onClick={() => {
                 const el = document.getElementById('recent-events');
                 el?.scrollIntoView({ behavior: 'smooth' });
@@ -96,7 +96,7 @@ function Dashboard() {
             >
               My Events
             </button>
-            <button className="btn-secondary w-full">
+            <button className="btn-secondary w-full text-sm sm:text-base">
               📊 View Analytics
             </button>
           </div>
