@@ -16,25 +16,34 @@ Managing event proposals, participant registrations, updates, and communication 
 
 ## ✨ Features
 
-- 🔐 **Role-Based Authentication** – Secure login for Admins, Organizers, and Customers using **JWT** tokens.
-- 📅 **Event Management System** – Propose, approve, and manage events with a streamlined UI.
-- 📣 **Real-Time Announcements** – Keep all users informed with instant updates.
-- 📊 **Analytics Dashboards** – Role-specific metrics for informed decision-making.
-- 🌐 **Responsive UI** – Built with **Tailwind CSS**, optimized for all devices.
-- 📸 **QR-Based Check-In** – Fast participant validation at events.
+- 🔐 **Role-Based Authentication** – Secure login for Admins, Organizers, and Customers using **JWT** tokens with HTTP-only cookies
+- 📅 **Event Management System** – Create, update, delete, and manage events with image uploads via Cloudinary
+- 👥 **Event Registration** – Customers can register for events with real-time capacity tracking
+- 🎫 **Ticket Management** – Dynamic ticket availability and sold count tracking
+- 🖼️ **Image Upload** – Event images stored on Cloudinary with multer integration
+- 🌐 **Responsive UI** – Built with **Tailwind CSS** and **Framer Motion** animations
+- 🔒 **Protected Routes** – Client-side route protection with role-based access control
+- 📱 **State Management** – Efficient state handling with **Zustand**
+- ✅ **Form Validation** – React Hook Form with Yup validation schemas
+- 🎨 **Modern UI/UX** – Toast notifications, smooth animations, and intuitive design
 
 ---
 
 ## 🏗️ Tech Stack
 
-| Category            | Technology                          |
-|---------------------|--------------------------------------|
-| **Frontend**        | React.js, Tailwind CSS               |
-| **Backend**         | Node.js, Express.js (ESM)            |
-| **Database**        | MongoDB with Mongoose                |
-| **Authentication**  | JWT + Middleware Role Protection     |
-| **UI Animations**   | Framer Motion                        |
-| **Deployment**      | Vercel (Frontend), Render (Backend)  |
+| Category            | Technology                                      |
+|---------------------|-------------------------------------------------|
+| **Frontend**        | React 19, Vite, Tailwind CSS                    |
+| **Backend**         | Node.js, Express.js 5 (ESM)                     |
+| **Database**        | MongoDB with Mongoose                           |
+| **Authentication**  | JWT + bcryptjs + HTTP-only Cookies              |
+| **File Upload**     | Multer + Cloudinary                             |
+| **State Management**| Zustand                                         |
+| **Form Handling**   | React Hook Form + Yup                           |
+| **UI Components**   | Framer Motion, React Icons, React Toastify      |
+| **QR Code**         | qrcode.react, html5-qrcode                      |
+| **Charts**          | Recharts                                        |
+| **Date Utils**      | date-fns                                        |
 
 ---
 
@@ -48,111 +57,279 @@ Managing event proposals, participant registrations, updates, and communication 
 
 ---
 
-## 🗓️ 45-Day Development Plan
+## 🎯 Current Implementation Status
 
-### 🏗️ Phase 1: Core Setup & Authentication (Days 1–7)
+### ✅ Completed Features
+- JWT-based authentication with role support (customer, organizer, admin)
+- User registration and login with secure password hashing
+- Event creation with image uploads to Cloudinary
+- Event listing with owner information
+- Single event details view
+- Event registration system with capacity management
+- Protected routes with role-based access control
+- Responsive UI with Tailwind CSS
+- Toast notifications for user feedback
+- State management with Zustand
+- Form validation with React Hook Form and Yup
+- 404 error page handling
 
-| Day | Task                                           | Deliverable                         | Testing                         |
-|-----|------------------------------------------------|-------------------------------------|---------------------------------|
-| 1   | Initialize Vite + React + Tailwind frontend    | Basic frontend scaffold             | `npm run dev`                   |
-| 2   | Setup Node.js, Express (ESM), MongoDB backend | Backend connected to MongoDB         | Postman / ThunderClient tests   |
-| 3   | Implement JWT authentication (Login/Signup)   | Secure auth APIs                     | Token generation, route test    |
-| 4   | Create admin dashboard UI                       | Admin panel placeholder            | Manual UI check                 |
-| 5   | Setup organizer onboarding + event permissions | Organizer registration & login flow | Role validation tests           |
-| 6   | Setup customer onboarding system                | Customer signup & login            | DB inserts, form validation     |
-| 7   | Deploy backend to Render / Railway              | Live API URL                       | Smoke test, route checks        |
-
----
-
-### ⚙️ Phase 2: Core Features (Days 8–21)
-
-| Day | Task                                           | Deliverable                         | Testing                         |
-|-----|------------------------------------------------|-------------------------------------|---------------------------------|
-| 8   | Admin: Create/view/manage colleges             | CRUD operations on college data     | DB verification                 |
-| 9   | Organizer: Create & manage events              | Event form + auto code generation   | Code uniqueness test            |
-| 10  | Customer: Register for events                  | Registration form                   | DB check for customer-event link|
-| 11  | Build event participation UI for organizers    | Participant list UI                 | Data reflection in DB           |
-| 12  | Implement QR code-based event check-in system  | QR check-in integration             | Manual QR test                  |
-| 13  | Create announcement/notice board module        | Post/view announcements             | UI + DB check                   |
-| 14  | Implement role-based dashboards                | Different views: Admin/Organizer/Customer | Access control checks       |
-| 15  | Customer: View registered events               | Events list                       | UI rendering + data match       |
-| 16  | Organizer: Manage event participants           | Table of registered customers      | Pagination, filters             |
-| 17  | Admin: View analytics dashboard                | Stats on events, users              | Test with mock data             |
-| 18  | Build notification system (email/toast/pop-up) | Real-time alerts                    | Toast and email testing         |
-| 19  | Set up MongoDB indexes for performance         | Optimized queries                   | Query time benchmarks           |
-| 20  | Secure all backend routes with middleware      | AuthGuard and role checks           | Protected route access          |
-| 21  | Deploy frontend on Vercel/Netlify              | Live React UI                      | End-to-end manual testing       |
+### 🚧 In Progress / Planned
+- Dashboard analytics with Recharts
+- QR code check-in functionality
+- Event participant management interface
+- Payment integration with Razorpay
+- Advanced filtering and search
+- Admin panel for user management
+- Event approval workflow
 
 ---
 
-### 🎨 Phase 3: UI/UX Polish & Refinement (Days 22–35)
+## 🖼️ Design System
 
-| Day | Task                                           | Deliverable                         | Testing                         |
-|-----|------------------------------------------------|-------------------------------------|---------------------------------|
-| 22  | Add Framer Motion for smooth animations        | Page and modal transitions          | Visual inspection               |
-| 23  | Implement dark/light theme switcher            | Theme toggle across UI              | Manual toggle test              |
-| 24  | Add loading skeletons & spinners               | Enhanced UX during data fetch       | Performance test                |
-| 25  | Add form validation + error handling (Yup, Toasts) | UX-friendly forms                 | Wrong input test                |
-| 26  | Implement role-aware sidebar & header navigation | Role-based nav menus               | Click-through checks            |
-| 27  | Make UI fully responsive (mobile-first)        | Tablet + Mobile UI pass             | Cross-device tests              |
-| 28  | Add pagination, sorting & filtering to event tables | Improved data handling UX        | Filter/paginate test            |
-| 29  | Optimize image and QR uploads                   | File size limits + previews         | Upload test                    |
-| 30  | Add calendar view for upcoming events          | Schedule calendar integration       | Event date sync check           |
-| 31  | Add copy-to-clipboard for event codes          | Fast invite system                  | Clipboard test                  |
-| 32  | Improve dashboard metrics visualizations (Recharts) | Visual insights for admin         | Data mapping                    |
-| 33  | Add tooltips, modals, and accessibility improvements | Better UX                        | Keyboard nav, screen reader     |
-| 34  | Polish fonts, spacing, and color tokens        | Clean & branded UI                  | Style audit                     |
-| 35  | Conduct design review with peers                | Final UI adjustments                | Peer feedback                   |
-
----
-
-### 🚀 Phase 4: Testing, Documentation & Launch (Days 36–45)
-
-| Day | Task                                           | Deliverable                         | Testing                         |
-|-----|------------------------------------------------|-------------------------------------|---------------------------------|
-| 36  | Write backend unit tests with Jest             | Test coverage for APIs              | `npm run test`                  |
-| 37  | Perform E2E tests using Cypress or Playwright | Full user journey simulation        | E2E flow                       |
-| 38  | Rate-limit sensitive endpoints (e.g., registration) | Protection against spam          | Repeated request test           |
-| 39  | Apply MongoDB validation schemas               | Clean inserts, strict models        | Wrong input test                |
-| 40  | Add 404 and error fallback pages               | Error routing                      | Broken route test               |
-| 41  | Deploy full-stack version                       | Live production build               | Smoke test                     |
-| 42  | Record full walkthrough demo video             | 3–5 min feature showcase            | Peer review                    |
-| 43  | Write detailed `README.md`, API Docs, and Setup Guides | Project documentation           | Markdown lint                  |
-| 44  | Collect user feedback from early testers       | Feedback forms                    | Interview notes                |
-| 45  | Plan v2 roadmap (mobile app, gamification, offline mode) | Internal expansion proposal     | Not applicable                 |
-
----
-
-## 🖼️ Design Guidelines
-
-- 🎨 **Colors:**  
-  - Background: `#1a1a1a`  
-  - Primary Accents: `#FF7E33`, `#FACC15`
-
-- 🖋️ **Typography:**  
-  - **Poppins** – Headings  
-  - **Inter** – Body text
-
-- 📱 **Layout:**  
-  - Mobile-first, responsive design  
-  - Grid-based event display  
-  - Smooth transitions with **Framer Motion**
+- 🎨 **Colors:** Dark theme with `#1a1a1a` background and vibrant accent colors
+- 🖋️ **Typography:** Modern sans-serif fonts for readability
+- 📱 **Layout:** Mobile-first responsive design with Tailwind CSS
+- ✨ **Animations:** Smooth transitions powered by Framer Motion
+- 🎭 **Components:** Reusable React components with consistent styling
 
 ---
 
 ## 🚀 Installation Guide
 
+### Prerequisites
+- Node.js (v18 or higher)
+- MongoDB (local or Atlas)
+- Git
+
 ### 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/kalviumcommunity/S86_Chetan_Capstone_CommenceCraze.git
 cd S86_Chetan_Capstone_CommenceCraze
+```
 
+### 2️⃣ Backend Setup
 
+```bash
+# Navigate to backend directory
+cd Backend
+
+# Install dependencies
+npm install
+
+# Create .env file from example
+cp .env.example .env
+
+# Update .env with your MongoDB URL and other credentials
+# Example:
+# PORT=5000
+# MONGO_URL=mongodb://localhost:27017/commence-craze
+# JWT_SECRET=your_secret_key_here
+# FRONTEND_URL=http://localhost:5173
+
+# Start the development server
+npm run dev
+```
+
+The backend will run on **https://s86-chetan-capstone-commencecraze.onrender.com**
+
+### 3️⃣ Frontend Setup
+
+Open a new terminal:
+
+```bash
+# Navigate to frontend directory
 cd frontend
-npm install
-npm run dev
 
-
-cd ../backend
+# Install dependencies
 npm install
+
+# Create .env file from example (optional)
+cp .env.example .env
+
+# Start the development server
 npm run dev
+```
+
+The frontend will run on **http://localhost:5173**
+
+### 4️⃣ Access the Application
+
+Open your browser and navigate to:
+- **Frontend:** http://localhost:5173
+- **Backend API:** https://s86-chetan-capstone-commencecraze.onrender.com/health
+
+---
+
+## 📁 Project Structure
+
+```
+S86_Chetan_Capstone_CommenceCraze/
+├── Backend/
+│   ├── middlewares/
+│   │   └── authMiddleware.js        # JWT authentication & role-based access
+│   ├── models/
+│   │   ├── Event.js                 # Event schema with participants
+│   │   └── User.js                  # User schema with roles
+│   ├── routes/
+│   │   ├── auth.js                  # Auth routes (register, login, profile, logout)
+│   │   └── event.js                 # Event CRUD & registration routes
+│   ├── utils/
+│   │   └── cloudinary.js            # Cloudinary config for image uploads
+│   ├── package.json                 # Backend dependencies
+│   └── server.js                    # Express server with CORS & error handling
+│
+├── frontend/
+│   ├── public/                      # Static assets
+│   ├── src/
+│   │   ├── assets/                  # Images, icons
+│   │   ├── components/
+│   │   │   ├── CreateEventModal.jsx # Modal for creating events
+│   │   │   ├── Navbar.jsx           # Navigation bar with auth state
+│   │   │   └── ProtectedRoute.jsx   # Route guard component
+│   │   ├── pages/
+│   │   │   ├── Dashboard.jsx        # User dashboard
+│   │   │   ├── EventDetails.jsx     # Single event view & registration
+│   │   │   ├── Events.jsx           # Events listing page
+│   │   │   ├── Home.jsx             # Landing page
+│   │   │   ├── Login.jsx            # Login page
+│   │   │   ├── Register.jsx         # Registration page
+│   │   │   └── NotFound.jsx         # 404 page
+│   │   ├── services/
+│   │   │   ├── api.js               # Axios instance configuration
+│   │   │   ├── authService.js       # Auth API calls
+│   │   │   └── eventService.js      # Event API calls
+│   │   ├── store/
+│   │   │   ├── authStore.js         # Zustand auth state
+│   │   │   └── eventStore.js        # Zustand event state
+│   │   ├── App.jsx                  # Main App with routing
+│   │   ├── App.css                  # Custom styles
+│   │   ├── index.css                # Global styles + Tailwind directives
+│   │   └── main.jsx                 # React entry point
+│   ├── eslint.config.js             # ESLint configuration
+│   ├── index.html                   # HTML template
+│   ├── package.json                 # Frontend dependencies
+│   ├── postcss.config.js            # PostCSS with Tailwind
+│   ├── tailwind.config.js           # Tailwind customization
+│   └── vite.config.js               # Vite build configuration
+│
+└── Readme.md                        # Project documentation
+```
+
+---
+
+## 🔧 Available Scripts
+
+### Backend
+```bash
+npm run dev      # Start development server with nodemon (port 5000)
+npm start        # Start production server
+```
+
+### Frontend
+```bash
+npm run dev      # Start development server (port 5173)
+npm run build    # Build for production
+npm run preview  # Preview production build
+npm run lint     # Run ESLint
+```
+
+---
+
+## 🔒 Environment Variables
+
+### Backend (.env)
+```env
+PORT=5000
+NODE_ENV=development
+MONGO_URL=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRE=7d
+FRONTEND_URL=http://localhost:5173
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+```
+
+### Frontend (.env)
+```env
+VITE_API_URL=https://s86-chetan-capstone-commencecraze.onrender.com
+VITE_APP_NAME=Commence Craze
+```
+
+---
+
+## 🌐 API Endpoints
+
+### Health Check
+- `GET /health` - API health status
+
+### Authentication (/user)
+- `POST /user/register` - Register new user (name, email, password, role)
+- `POST /user/login` - Login user (returns JWT in cookie)
+- `GET /user/profile` - Get authenticated user profile
+- `POST /user/logout` - Logout user (clears cookie)
+
+### Events (/api)
+- `GET /api/` - Get all active events with owner details
+- `GET /api/:id` - Get single event details
+- `GET /api/my/events` - Get logged-in user's created events (Protected)
+- `POST /api/create` - Create new event with image upload (Organizer/Admin)
+- `PUT /api/:id` - Update event (Owner only)
+- `DELETE /api/:id` - Delete event (Owner only)
+- `POST /api/:id/register` - Register for event as participant
+- `DELETE /api/:id/unregister` - Unregister from event
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📝 License
+
+This project is licensed under the ISC License.
+
+---
+
+## 👨‍💻 Author
+
+**Chetan**  
+Kalvium Community - S86 Capstone Project
+
+---
+
+## 🙏 Acknowledgments
+
+- Kalvium Community for support and guidance
+- MongoDB for database solutions
+- Vercel and Render for deployment platforms
+
+---
+
+## 🚀 Deployment
+
+### Backend (Render/Railway)
+1. Create new Web Service
+2. Connect GitHub repository
+3. Set build command: `npm install`
+4. Set start command: `npm start`
+5. Add environment variables
+6. Deploy
+
+### Frontend (Vercel/Netlify)
+1. Import GitHub repository
+2. Framework preset: Vite
+3. Build command: `npm run build`
+4. Output directory: `dist`
+5. Add environment variables
+6. Deploy
+
+---
+
+**Made with ❤️ by Chetan | Start the Buzz. Fuel the Craze.**

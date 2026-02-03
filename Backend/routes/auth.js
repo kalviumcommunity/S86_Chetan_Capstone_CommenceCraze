@@ -1,10 +1,9 @@
-const express = require("express");
-const router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
-const mongoose = require("mongoose");
+import express from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
 
+const router = express.Router();
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -12,8 +11,8 @@ const jwtSecret = process.env.JWT_SECRET;
 
 // Register
 router.post("/register", async (req, res) => {
-  const { name, email, password } = req.body;
-  
+  const { name, email, password, role } = req.body;
+
   try {
     // Validation
     if (!name || !email || !password) {
@@ -34,6 +33,7 @@ router.post("/register", async (req, res) => {
       name,
       email,
       password: bcrypt.hashSync(password, bcryptSalt),
+      role: role || 'customer', // Default to customer if not provided
     });
 
     // Remove password from response
@@ -47,7 +47,7 @@ router.post("/register", async (req, res) => {
 // Login
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
-  
+
   try {
     if (!email || !password) {
       return res.status(400).json({ error: "Email and password are required" });
@@ -60,20 +60,20 @@ router.post("/login", async (req, res) => {
     if (!passOk) return res.status(401).json({ error: "Invalid password" });
 
     jwt.sign(
-      { email: userDoc.email, id: userDoc._id, name: userDoc.name }, 
-      jwtSecret, 
+      { email: userDoc.email, id: userDoc._id, name: userDoc.name, role: userDoc.role },
+      jwtSecret,
       { expiresIn: '24h' },
       (err, token) => {
         if (err) return res.status(500).json({ error: "Failed to generate token" });
-        
+
         res.cookie("token", token, {
           httpOnly: true,
           secure: process.env.NODE_ENV === 'production',
           maxAge: 24 * 60 * 60 * 1000 // 24 hours
         });
-        
+
         const { password: _, ...userWithoutPassword } = userDoc.toObject();
-        res.json({userWithoutPassword,token});
+        res.json({ userWithoutPassword, token });
       }
     );
   } catch (error) {
@@ -101,6 +101,6 @@ router.post("/logout", (req, res) => {
   res.json({ message: "Logged out successfully" });
 });
 
-module.exports = router;
+export default router;
 
 
