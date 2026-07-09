@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-toastify';
 import { useEventStore } from '../store/eventStore';
 import { useAuthStore } from '../store/authStore';
+import EditEventModal from '../components/EditEventModal';
 
 function EventDetails() {
   const { id } = useParams();
@@ -11,6 +12,7 @@ function EventDetails() {
   const { currentEvent, fetchEventById, loading, deleteEvent, registerForEvent } = useEventStore();
   const { user } = useAuthStore();
   const [registering, setRegistering] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   useEffect(() => {
     fetchEventById(id).catch(() => {
@@ -161,7 +163,7 @@ function EventDetails() {
             {isOwner ? (
               <>
                 <button 
-                  onClick={() => toast.info('Edit functionality coming soon!')}
+                  onClick={() => setShowEditModal(true)}
                   className="btn-primary flex-1"
                 >
                   Edit Event
@@ -189,6 +191,16 @@ function EventDetails() {
           </div>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {showEditModal && (
+          <EditEventModal
+            event={currentEvent}
+            onClose={() => setShowEditModal(false)}
+            onSuccess={() => fetchEventById(id)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
