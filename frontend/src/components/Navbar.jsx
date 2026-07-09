@@ -4,6 +4,12 @@ import { toast } from 'react-toastify';
 import { useAuthStore } from '../store/authStore';
 import { useState } from 'react';
 
+/**
+ * Navbar Component
+ * Renders the responsive top navigation bar for the application.
+ * Displays navigation links based on user authentication status (Login/Register or Dashboard/Events/Logout).
+ * Handles mobile hamburger toggle drawer.
+ */
 function Navbar() {
   const { user, isAuthenticated, logout } = useAuthStore();
   const navigate = useNavigate();
