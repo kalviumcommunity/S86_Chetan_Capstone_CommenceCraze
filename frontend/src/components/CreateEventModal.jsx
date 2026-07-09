@@ -3,6 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-toastify';
 import { useEventStore } from '../store/eventStore';
 
+/**
+ * CreateEventModal Component
+ * Renders a popup modal window containing a form to create a new event.
+ * Collects title, description, date, time, location, ticket price, capacity, and cover image.
+ * Uses eventStore to post new event data to backend.
+ *
+ * @param {Object} props
+ * @param {Function} props.onClose - Callback function triggered to close the modal.
+ * @param {Function} props.onSuccess - Callback function triggered after event is successfully created.
+ */
 function CreateEventModal({ onClose, onSuccess }) {
   const { createEvent, loading } = useEventStore();
   const [formData, setFormData] = useState({
