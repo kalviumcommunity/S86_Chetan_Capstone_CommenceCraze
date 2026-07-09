@@ -72,6 +72,7 @@ Managing event proposals, participant registrations, updates, and communication 
 - State management with Zustand
 - Form validation with React Hook Form and Yup
 - 404 error page handling
+- Update and delete event functionalities (update and delete an entity in React app)
 
 ### 🚧 In Progress / Planned
 - Dashboard analytics with Recharts
